@@ -12,11 +12,11 @@ return [
     |
     */
     'colors' => [
-        'primary' => env('THEME_COLORS_PRIMARY', '#16a34a'),
-        'secondary' => env('THEME_COLORS_SECONDARY', '#27272a'),
+        'primary' => env('THEME_COLORS_PRIMARY', '#3b82f6'),
+        'secondary' => env('THEME_COLORS_SECONDARY', '#12161d'),
 
-        'background' => env('THEME_COLORS_BACKGROUND', '#141414'),
-        'headers' => env('THEME_COLORS_HEADERS', '#171717'),
-        'sidebar' => env('THEME_COLORS_SIDEBAR', '#18181b'),
+        'background' => env('THEME_COLORS_BACKGROUND', '#0a0e14'),
+        'headers' => env('THEME_COLORS_HEADERS', '#171b23'),
+        'sidebar' => env('THEME_COLORS_SIDEBAR', '#0d1117'),
     ],
 ];
