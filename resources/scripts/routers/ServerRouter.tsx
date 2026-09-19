@@ -117,7 +117,7 @@ function ServerRouter() {
                 <Sidebar className={'flex-none'} $collapsed={collapsed} theme={theme}>
                     <div
                         className={
-                            'h-16 w-full flex flex-col items-center justify-center mt-1 mb-3 select-none cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95'
+                            'h-16 w-full flex flex-col items-center justify-center mt-1 mb-3 select-none cursor-pointer transition-colors duration-150'
                         }
                         onClick={() => setCollapsed(!collapsed)}
                     >

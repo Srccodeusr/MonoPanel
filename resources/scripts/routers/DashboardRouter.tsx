@@ -61,7 +61,7 @@ function DashboardRouter() {
             <Sidebar className={'flex-none'} $collapsed={collapsed} theme={theme}>
                 <div
                     className={
-                        'h-16 w-full flex flex-col items-center justify-center mt-1 mb-3 select-none cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95'
+                        'h-16 w-full flex flex-col items-center justify-center mt-1 mb-3 select-none cursor-pointer transition-colors duration-150'
                     }
                     onClick={() => setCollapsed(!collapsed)}
                 >
@@ -122,7 +122,7 @@ function DashboardRouter() {
                     </NavLink>
                 </span>
                 <Sidebar.User>
-                    <span className="flex items-center rounded-full ring-2 ring-transparent transition-all duration-200 hover:ring-white/10 hover:scale-105">
+                    <span className="flex items-center rounded-full ring-2 ring-transparent transition-colors duration-150 hover:ring-white/10">
                         <Avatar.User />
                     </span>
                     <div className={'flex flex-col ml-3'}>
