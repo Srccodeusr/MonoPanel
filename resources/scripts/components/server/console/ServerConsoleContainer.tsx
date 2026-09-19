@@ -24,11 +24,11 @@ export type PowerAction = 'start' | 'stop' | 'restart' | 'kill';
 function statusToColor(status: ServerStatus): string {
     switch (status) {
         case 'running':
-            return 'text-green-500';
+            return 'text-emerald-400';
         case 'offline':
-            return 'text-red-500';
+            return 'text-red-400';
         default:
-            return 'text-yellow-500';
+            return 'text-amber-400';
     }
 }
 

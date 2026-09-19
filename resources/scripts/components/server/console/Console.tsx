@@ -269,7 +269,7 @@ export default ({ expand, setExpand }: Props) => {
                     </div>
                     <div className={styles.expand_icon}>
                         <ArrowsExpandIcon
-                            className={'hover:text-green-400 w-4 h-4 duration-300'}
+                            className={'hover:text-primary-400 w-4 h-4 duration-150'}
                             onClick={() => setExpand(s => !s)}
                         />
                     </div>
