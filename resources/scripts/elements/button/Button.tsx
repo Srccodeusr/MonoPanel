@@ -39,7 +39,7 @@ const StandardButton = forwardRef<HTMLButtonElement, ButtonProps>(({ className, 
 
     return (
         // @ts-expect-error not sure how to get this correct
-        <Button ref={ref} className={className} style={{ backgroundColor: primary }} {...props} />
+        <Button ref={ref} className={classNames(styles.primary, className)} style={{ backgroundColor: primary }} {...props} />
     );
 });
 
