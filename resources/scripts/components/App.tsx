@@ -26,7 +26,7 @@ interface ExtendedWindow extends Window {
     SiteConfiguration?: SiteSettings;
     ThemeConfiguration?: SiteTheme;
     EverestConfiguration?: EverestSettings;
-    PterodactylUser?: {
+    MonoNodeUser?: {
         uuid: string;
         username: string;
         email: string;
@@ -45,24 +45,24 @@ interface ExtendedWindow extends Window {
 }
 
 function App() {
-    const { PterodactylUser, SiteConfiguration, EverestConfiguration, ThemeConfiguration } = window as ExtendedWindow;
+    const { MonoNodeUser, SiteConfiguration, EverestConfiguration, ThemeConfiguration } = window as ExtendedWindow;
 
-    if (PterodactylUser && !store.getState().user.data) {
+    if (MonoNodeUser && !store.getState().user.data) {
         store.getActions().user.setUserData({
-            uuid: PterodactylUser.uuid,
-            username: PterodactylUser.username,
-            email: PterodactylUser.email,
-            language: PterodactylUser.language,
-            rootAdmin: PterodactylUser.root_admin,
-            avatarURL: PterodactylUser.avatar_url,
-            roleName: PterodactylUser.admin_role_name,
-            admin_role_id: PterodactylUser.admin_role_id,
-            adminPermissions: PterodactylUser.admin_permissions ?? [],
-            state: PterodactylUser.state,
-            useTotp: PterodactylUser.use_totp,
-            hasPassword: PterodactylUser.has_password ?? true,
-            createdAt: new Date(PterodactylUser.created_at),
-            updatedAt: new Date(PterodactylUser.updated_at),
+            uuid: MonoNodeUser.uuid,
+            username: MonoNodeUser.username,
+            email: MonoNodeUser.email,
+            language: MonoNodeUser.language,
+            rootAdmin: MonoNodeUser.root_admin,
+            avatarURL: MonoNodeUser.avatar_url,
+            roleName: MonoNodeUser.admin_role_name,
+            admin_role_id: MonoNodeUser.admin_role_id,
+            adminPermissions: MonoNodeUser.admin_permissions ?? [],
+            state: MonoNodeUser.state,
+            useTotp: MonoNodeUser.use_totp,
+            hasPassword: MonoNodeUser.has_password ?? true,
+            createdAt: new Date(MonoNodeUser.created_at),
+            updatedAt: new Date(MonoNodeUser.updated_at),
         });
     }
 
@@ -78,7 +78,7 @@ function App() {
         store.getActions().everest.setEverest(EverestConfiguration!);
     }
 
-    if (PterodactylUser?.state === 'suspended') {
+    if (MonoNodeUser?.state === 'suspended') {
         return (
             <div style={{ color: 'white', fontWeight: 'bold', marginTop: '10px', marginLeft: '10px' }}>
                 Your account has been suspended and blocked by an administrator.
@@ -86,21 +86,21 @@ function App() {
         );
     }
 
-    const hasAdminRole: boolean = (PterodactylUser?.root_admin || Boolean(PterodactylUser?.admin_role_id)) ?? false;
+    const hasAdminRole: boolean = (MonoNodeUser?.root_admin || Boolean(MonoNodeUser?.admin_role_id)) ?? false;
 
     return (
         <>
             <GlobalStylesheet />
             <StoreProvider store={store}>
                 <ProgressBar />
-                {PterodactylUser?.root_admin && !SiteConfiguration?.setup ? (
+                {MonoNodeUser?.root_admin && !SiteConfiguration?.setup ? (
                     <Spinner.Suspense>
                         <SetupContainer />
                     </Spinner.Suspense>
                 ) : (
                     <>
                         {' '}
-                        {PterodactylUser?.username.startsWith('null_user_') &&
+                        {MonoNodeUser?.username.startsWith('null_user_') &&
                         EverestConfiguration?.auth.modules.onboarding.enabled ? (
                             <Spinner.Suspense>
                                 <Onboarding />
