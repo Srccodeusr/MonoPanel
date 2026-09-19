@@ -111,7 +111,7 @@ const EditScheduleModal = ({ schedule }: Props) => {
                         running. Use the fields above to specify when these tasks should begin running.
                     </p>
                     <div
-                        css={tw`mt-6 border-2 border-black/25 shadow-inner p-4 rounded`}
+                        css={tw`mt-6 border border-black/25 shadow-inner p-4 rounded`}
                         style={{ backgroundColor: colors.secondary }}
                     >
                         <Switch
@@ -128,7 +128,7 @@ const EditScheduleModal = ({ schedule }: Props) => {
                         )}
                     </div>
                     <div
-                        css={tw`mt-6 border-2 border-black/25 shadow-inner p-4 rounded`}
+                        css={tw`mt-6 border border-black/25 shadow-inner p-4 rounded`}
                         style={{ backgroundColor: colors.secondary }}
                     >
                         <FormikSwitch
@@ -138,7 +138,7 @@ const EditScheduleModal = ({ schedule }: Props) => {
                         />
                     </div>
                     <div
-                        css={tw`mt-6 border-2 border-black/25 shadow-inner p-4 rounded`}
+                        css={tw`mt-6 border border-black/25 shadow-inner p-4 rounded`}
                         style={{ backgroundColor: colors.secondary }}
                     >
                         <FormikSwitch
