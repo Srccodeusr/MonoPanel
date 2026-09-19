@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faMemory,
     faMicrochip,
+    faHdd,
     faPlus,
     faPowerOff,
     faTrash,
@@ -25,6 +26,7 @@ import { type ServerGroup } from '@definitions/server';
 import { VisibleDialog } from './groups/ServerGroupDialog';
 import useFlash from '@/plugins/useFlash';
 import { timeUntil } from '../server/billing/ServerBillingContainer';
+import Sparkline from '@/elements/Sparkline';
 
 export function statusToColor(state?: ServerPowerState): string {
     switch (state) {
@@ -88,20 +90,21 @@ const StatusDot = ({ state }: { state?: ServerPowerState }) => {
     );
 };
 
-/** Resource bar with animated fill */
+/** A labelled metric row: icon + name, a short trend sparkline, the current %, and a thin fill bar. */
 const ResourceBar = ({
     value,
+    history,
     icon,
     label,
-    colorClass,
 }: {
     value: number;
+    history: number[];
     icon: IconDefinition;
     label: string;
-    colorClass: string;
 }) => {
     const clamped = Math.min(Math.max(value, 0), 100);
-    const barColor = clamped >= 90 ? 'bg-red-400' : clamped >= 70 ? 'bg-amber-400' : colorClass;
+    const barColor = clamped >= 90 ? 'bg-red-400' : clamped >= 70 ? 'bg-amber-400' : 'bg-primary-400';
+    const sparkColor = clamped >= 90 ? '#f87171' : clamped >= 70 ? '#fbbf24' : '#60a5fa';
 
     return (
         <div className={'w-full flex flex-col gap-1 min-w-0'}>
@@ -110,14 +113,17 @@ const ResourceBar = ({
                     <FontAwesomeIcon icon={icon} className={'text-gray-500'} size={'xs'} />
                     {label}
                 </span>
-                <span
-                    className={classNames(
-                        'text-xs font-mono font-semibold tabular-nums',
-                        clamped >= 90 ? 'text-red-400' : clamped >= 70 ? 'text-amber-400' : 'text-gray-200',
-                    )}
-                >
-                    {clamped.toFixed(0)}%
-                </span>
+                <div className={'flex items-center gap-2'}>
+                    <Sparkline data={history} max={100} color={sparkColor} width={48} height={16} />
+                    <span
+                        className={classNames(
+                            'text-xs font-mono font-semibold tabular-nums w-10 text-right',
+                            clamped >= 90 ? 'text-red-400' : clamped >= 70 ? 'text-amber-400' : 'text-gray-200',
+                        )}
+                    >
+                        {clamped.toFixed(0)}%
+                    </span>
+                </div>
             </div>
             <div className={'h-1.5 w-full rounded-full bg-white/10 overflow-hidden'}>
                 <div
@@ -131,6 +137,10 @@ const ResourceBar = ({
 
 type Timer = ReturnType<typeof setInterval>;
 
+/** Keep only the most recent N samples, oldest first, newest last. */
+const MAX_HISTORY = 12;
+const pushHistory = (previous: number[], value: number) => [...previous, value].slice(-MAX_HISTORY);
+
 export default ({
     server,
     group,
@@ -142,6 +152,11 @@ export default ({
 }) => {
     const { clearFlashes, addFlash, clearAndAddHttpError } = useFlash();
     const [stats, setStats] = useState<ServerStats>();
+    const [history, setHistory] = useState<{ cpu: number[]; memory: number[]; disk: number[] }>({
+        cpu: [],
+        memory: [],
+        disk: [],
+    });
     const colors = useStoreState(state => state.theme.data!.colors);
     const interval = useRef<Timer>(null) as React.MutableRefObject<Timer>;
     const [isSuspended, setIsSuspended] = useState(server.status === 'suspended');
@@ -182,6 +197,19 @@ export default ({
             ? stats?.cpuUsagePercent ?? 0
             : (stats?.cpuUsagePercent ?? 0) / (server.limits.cpu / 100);
     const memoryUsed = ((stats?.memoryUsageInBytes ?? 0) / 1024 / 1024 / server.limits.memory) * 100;
+    const diskUsed = server.limits.disk === 0 ? 0 : ((stats?.diskUsageInBytes ?? 0) / 1024 / 1024 / server.limits.disk) * 100;
+
+    // Sample the rolling history whenever a fresh stats poll comes in, rather than on every
+    // render, so the sparkline only grows once every ~30s alongside the real usage numbers.
+    useEffect(() => {
+        if (!stats) return;
+        setHistory(previous => ({
+            cpu: pushHistory(previous.cpu, Number(cpuUsed.toFixed(1))),
+            memory: pushHistory(previous.memory, Number(memoryUsed.toFixed(1))),
+            disk: pushHistory(previous.disk, Number(diskUsed.toFixed(1))),
+        }));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [stats]);
 
     const powerState: ServerPowerState | undefined = stats?.status;
     const isOfflineOrSuspended = !!server.status || stats?.status === 'offline';
@@ -195,8 +223,8 @@ export default ({
     return (
         <div
             className={classNames(
-                'group relative w-full my-2 rounded-xl border transition-all duration-300',
-                'hover:border-white/15 hover:shadow-lg hover:shadow-black/30',
+                'group relative h-full flex flex-col rounded-xl border transition-colors duration-150',
+                'hover:border-white/15 hover:ring-1 hover:ring-white/10',
                 'border-white/5',
             )}
             style={{ backgroundColor: colors.sidebar }}
@@ -204,7 +232,7 @@ export default ({
             {/* Top accent line matching server status */}
             <div
                 className={classNames(
-                    'absolute top-0 left-3 right-3 h-px rounded-full transition-all duration-500',
+                    'absolute top-0 left-3 right-3 h-px rounded-full transition-colors duration-300',
                     powerState === 'running'
                         ? 'bg-emerald-500/50'
                         : powerState === 'starting'
@@ -215,8 +243,8 @@ export default ({
                 )}
             />
 
-            <div className={'flex flex-col lg:flex-row lg:items-center gap-4 p-4 lg:p-5'}>
-                <div className={'flex items-start gap-3 flex-1 min-w-0'}>
+            <div className={'flex flex-col gap-4 p-4 lg:p-5 flex-1'}>
+                <div className={'flex items-start gap-3 min-w-0'}>
                     <div className={'relative flex-shrink-0 mt-0.5'}>
                         <div
                             className={classNames(
@@ -241,7 +269,7 @@ export default ({
                             <Link
                                 to={`/server/${server.id}`}
                                 className={
-                                    'font-semibold text-white text-sm hover:text-white/80 transition-colors duration-200 truncate max-w-xs'
+                                    'font-semibold text-white text-sm hover:text-white/80 transition-colors duration-150 truncate max-w-[10rem]'
                                 }
                             >
                                 {server.name}
@@ -262,6 +290,8 @@ export default ({
                                     ? 'Transferring'
                                     : statusToLabel(powerState)}
                             </span>
+                        </div>
+                        <div className={'flex flex-wrap items-center gap-x-3 gap-y-1'}>
                             {hasGroup ? (
                                 <span
                                     className={
@@ -287,7 +317,7 @@ export default ({
                                 <button
                                     onClick={() => setOpen({ open: 'add', serverId: server.uuid })}
                                     className={
-                                        'hidden xl:inline-flex items-center gap-1 text-xs text-gray-600 hover:text-gray-300 border border-dashed border-gray-700 hover:border-gray-500 rounded-full px-2 py-0.5 transition-all duration-200 hover:bg-white/5'
+                                        'inline-flex items-center gap-1 text-xs text-gray-600 hover:text-gray-300 border border-dashed border-gray-700 hover:border-gray-500 rounded-full px-2 py-0.5 transition-colors duration-150 hover:bg-white/5'
                                     }
                                 >
                                     <FontAwesomeIcon icon={faPlus} size={'xs'} />
@@ -295,7 +325,7 @@ export default ({
                                 </button>
                             )}
                         </div>
-                        <div className={'flex flex-wrap items-center gap-x-3 gap-y-1'}>
+                        <div className={'flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5'}>
                             {allocation && (
                                 <span className={'flex items-center gap-1.5 text-xs text-gray-500'}>
                                     <FontAwesomeIcon icon={faNetworkWired} size={'xs'} className={'text-gray-600'} />
@@ -327,7 +357,7 @@ export default ({
                         </div>
                     </div>
                 </div>
-                <div className={'flex-shrink-0 w-full lg:w-72 xl:w-80'}>
+                <div className={'flex-1'}>
                     {isOfflineOrSuspended ? (
                         <div
                             className={classNames(
@@ -351,35 +381,41 @@ export default ({
                     ) : (
                         <div
                             className={
-                                'flex justify-between gap-y-3 gap-x-5 bg-white/[0.03] rounded-lg border border-white/5 px-4 py-3'
+                                'flex flex-col gap-3 bg-white/[0.03] rounded-lg border border-white/5 px-4 py-3'
                             }
                         >
                             <ResourceBar
-                                value={Number(cpuUsed?.toFixed(1) ?? 0)}
+                                value={Number(cpuUsed.toFixed(1))}
+                                history={history.cpu}
                                 icon={faMicrochip}
                                 label={'CPU'}
-                                colorClass={'bg-white/50'}
                             />
                             <ResourceBar
                                 value={Number(memoryUsed.toFixed(1))}
+                                history={history.memory}
                                 icon={faMemory}
                                 label={'Memory'}
-                                colorClass={'bg-white/50'}
                             />
+                            {server.limits.disk > 0 && (
+                                <ResourceBar
+                                    value={Number(diskUsed.toFixed(1))}
+                                    history={history.disk}
+                                    icon={faHdd}
+                                    label={'Disk'}
+                                />
+                            )}
                         </div>
                     )}
                 </div>
-                <div className={'flex-shrink-0 hidden xl:flex items-center'}>
-                    <Link
-                        to={`/server/${server.id}`}
-                        className={
-                            'flex items-center gap-1.5 text-xs text-gray-600 hover:text-white border border-white/5 hover:border-white/20 rounded-lg px-3 py-2 bg-white/[0.02] hover:bg-white/10 transition-all duration-200'
-                        }
-                    >
-                        <FontAwesomeIcon icon={faArrowUpRightFromSquare} size={'xs'} />
-                        Manage
-                    </Link>
-                </div>
+                <Link
+                    to={`/server/${server.id}`}
+                    className={
+                        'flex items-center justify-center gap-1.5 text-xs font-medium text-gray-400 hover:text-white border border-white/5 hover:border-white/20 rounded-lg px-3 py-2 bg-white/[0.02] hover:bg-white/10 transition-colors duration-150'
+                    }
+                >
+                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} size={'xs'} />
+                    Manage
+                </Link>
             </div>
         </div>
     );

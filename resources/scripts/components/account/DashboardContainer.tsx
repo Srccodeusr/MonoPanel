@@ -25,6 +25,7 @@ import { type ServerGroup } from '@definitions/server';
 import ServerGroupDialog, { VisibleDialog } from '@account/groups/ServerGroupDialog';
 import ActivityLogContainer from './activity/ActivityLogContainer';
 import classNames from 'classnames';
+import Skeleton from '@/elements/Skeleton';
 
 export default () => {
     const { search } = useLocation();
@@ -101,7 +102,13 @@ export default () => {
                             <FontAwesomeIcon icon={faList} />
                         </Button.Text>
                     </h2>
-                    {!servers || servers.items.length < 1 ? (
+                    {!servers ? (
+                        <div className={'grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4'}>
+                            {Array.from({ length: 3 }).map((_, index) => (
+                                <Skeleton key={index} className={'h-48 rounded-xl'} />
+                            ))}
+                        </div>
+                    ) : servers.items.length < 1 ? (
                         <ContentBox>
                             <div className={'text-gray-400'}>
                                 <div className={'grid lg:grid-cols-2 gap-6 m-4'}>
@@ -139,16 +146,16 @@ export default () => {
                         <Pagination data={servers} onPageSelect={setPage}>
                             {({ items }) =>
                                 items.length > 0 ? (
-                                    items.map((server, _index) => (
-                                        <>
+                                    <div className={'grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4'}>
+                                        {items.map(server => (
                                             <ServerRow
                                                 key={server.uuid}
                                                 server={server}
                                                 setOpen={setOpen}
                                                 group={groups.find(x => x.id === server.groupId)}
                                             />
-                                        </>
-                                    ))
+                                        ))}
+                                    </div>
                                 ) : (
                                     <div className={'w-full'} style={{ backgroundColor: colors.secondary }}>
                                         <div className={'px-6 py-4 text-gray-300'}>

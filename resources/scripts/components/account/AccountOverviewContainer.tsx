@@ -56,7 +56,7 @@ export default () => {
                     <Detail label={'Member Since'}>{format(user.createdAt, 'MMMM do, yyyy')}</Detail>
                     <p css={tw`text-xs text-gray-400 mt-6`}>
                         Your email, password, and sign-in methods are managed under{' '}
-                        <Link to={'/account/security'} css={tw`text-green-400 hover:text-green-200 duration-300`}>
+                        <Link to={'/account/security'} css={tw`text-primary-400 hover:text-primary-300 duration-150`}>
                             Security
                         </Link>
                         .
