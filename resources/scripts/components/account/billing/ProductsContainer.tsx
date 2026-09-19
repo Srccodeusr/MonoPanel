@@ -131,7 +131,7 @@ export default () => {
                                     <ContentBox
                                         key={product.id}
                                         className={
-                                            'transition duration-200 hover:shadow-xl hover:-translate-y-0.5 flex flex-col'
+                                            'transition duration-150 hover:ring-1 hover:ring-white/10 hover:-translate-y-0.5 flex flex-col'
                                         }
                                     >
                                         <div className={'p-3 lg:p-6 flex flex-col flex-1'}>
