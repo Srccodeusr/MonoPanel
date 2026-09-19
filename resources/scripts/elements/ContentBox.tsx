@@ -26,8 +26,8 @@ const ContentBox = ({ title, borderColor, showFlashes, showLoadingOverlay, child
             <div
                 style={{ backgroundColor: secondary }}
                 css={[
-                    tw`p-4 rounded-xl shadow-lg ring-1 ring-white/5 relative transition-shadow duration-300`,
-                    !!borderColor && tw`border-t-4`,
+                    tw`p-4 rounded-xl ring-1 ring-white/5 relative transition-colors duration-150`,
+                    !!borderColor && tw`border-t-2`,
                 ]}
             >
                 <SpinnerOverlay visible={showLoadingOverlay || false} />

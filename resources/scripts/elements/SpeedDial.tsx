@@ -15,7 +15,7 @@ interface QuickActionProps {
 const QuickAction = ({ tooltip, icon: Icon, link }: QuickActionProps) => (
     <Tooltip placement={'left'} content={tooltip} arrow>
         <Link to={link}>
-            <Button.Text className={'w-12 h-12 shadow-lg backdrop-blur-md'}>
+            <Button.Text className={'w-12 h-12 ring-1 ring-white/10 backdrop-blur-md'}>
                 <Icon className={'w-5 h-5'} />
             </Button.Text>
         </Link>
@@ -70,7 +70,7 @@ export default () => {
                 )}
             </AnimatePresence>
             <Button
-                className={'w-12 h-12 shadow-xl transition-transform duration-200 hover:scale-105'}
+                className={'w-12 h-12 ring-1 ring-white/10 transition-colors duration-150'}
                 onClick={() => setOpen(!open)}
             >
                 <motion.span

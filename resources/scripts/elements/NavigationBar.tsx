@@ -15,7 +15,7 @@ const RightNavigation = styled.div<{ theme: SiteTheme }>`
     & > button,
     & > div,
     & > .navigation-link {
-        ${tw`flex items-center h-full no-underline text-neutral-300 px-6 cursor-pointer transition-all duration-300 gap-x-2`};
+        ${tw`flex items-center h-full no-underline text-neutral-300 px-6 cursor-pointer transition-colors duration-150 gap-x-2`};
         ${tw`text-gray-400 font-medium`};
 
         &:active,
@@ -118,7 +118,7 @@ const NavigationBar = () => {
 
     return (
         <div
-            className="w-full overflow-x-auto shadow-md mb-8 backdrop-blur-md border-b border-white/5"
+            className="w-full overflow-x-auto mb-8 backdrop-blur-md border-b border-white/5"
             style={{ backgroundColor: theme.colors.sidebar }}
         >
             <div className="px-8 flex h-[3.5rem] w-full items-center">

@@ -6,13 +6,17 @@ import tw, { styled } from 'twin.macro';
 import { SiteTheme } from '@/state/theme';
 
 const StyledSubNavigation = styled.div<{ $theme: SiteTheme }>`
-    ${tw`flex flex-row items-center flex-shrink-0 h-12 mb-4 border-b border-neutral-700 overflow-x-auto`};
+    ${tw`flex flex-row items-center flex-shrink-0 h-12 mb-4 border-b border-white/5 overflow-x-auto`};
 
     & > a {
-        ${tw`flex flex-row items-center h-full px-4 border-b text-base whitespace-nowrap border-transparent`};
+        ${tw`flex flex-row items-center h-full px-4 border-b text-sm font-medium whitespace-nowrap border-transparent transition-colors duration-150`};
 
         & > svg {
-            ${tw`w-6 h-6 mr-2`};
+            ${tw`w-5 h-5 mr-2`};
+        }
+
+        &:hover {
+            ${tw`text-neutral-100`};
         }
 
         &:active,

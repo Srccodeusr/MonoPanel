@@ -98,7 +98,7 @@ export const TableBody = ({ children }: { children: ReactNode }) => {
 };
 
 export const TableRow = ({ children }: { children: ReactNode }) => {
-    return <tr css={tw`h-12 transition-colors duration-150 hover:bg-neutral-600/60`}>{children}</tr>;
+    return <tr css={tw`h-12 transition-colors duration-150 hover:bg-white/5`}>{children}</tr>;
 };
 
 interface Props<T> {
@@ -337,7 +337,7 @@ export default ({ className, children }: { className?: string; children: ReactNo
     return (
         <div css={tw`flex flex-col w-full`}>
             <div
-                className={classNames(className, 'rounded-xl shadow-lg ring-1 ring-white/5')}
+                className={classNames(className, 'rounded-xl ring-1 ring-white/5')}
                 style={{ backgroundColor: colors.secondary }}
             >
                 {children}

@@ -47,12 +47,8 @@ const ModalContainer = styled.div<{ alignTop?: boolean }>`
     margin-bottom: auto;
 
     & > .close-icon {
-        ${tw`absolute right-0 p-2 text-white cursor-pointer opacity-50 transition-all duration-150 ease-linear hover:opacity-100`};
+        ${tw`absolute right-0 p-2 text-white/60 cursor-pointer transition-colors duration-150 ease-linear hover:text-white`};
         top: -2.5rem;
-
-        &:hover {
-            ${tw`transform rotate-90`}
-        }
 
         & > svg {
             ${tw`w-6 h-6`};
@@ -143,7 +139,7 @@ function Modal({
                     </FadeTransition>
 
                     <div
-                        css={tw`p-3 sm:p-4 md:p-6 rounded-2xl shadow-2xl ring-1 ring-white/10 overflow-y-scroll transition-all duration-150 opacity-100 bg-black/80 backdrop-blur-xl`}
+                        css={tw`p-3 sm:p-4 md:p-6 rounded-xl shadow-sm ring-1 ring-white/10 overflow-y-scroll transition-all duration-150 opacity-100 bg-black/80 backdrop-blur-xl`}
                     >
                         {children}
                     </div>

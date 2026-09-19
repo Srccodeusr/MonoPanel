@@ -90,7 +90,7 @@ class DropdownMenu extends PureComponent<Props, State> {
                             this.setState({ visible: false });
                         }}
                         style={{ width: '12rem' }}
-                        css={tw`absolute bg-white/95 backdrop-blur-md p-2 rounded-xl border border-neutral-700/50 shadow-xl text-neutral-500 z-50`}
+                        css={tw`absolute bg-zinc-800/95 backdrop-blur-md p-2 rounded-xl ring-1 ring-white/10 text-neutral-300 z-50`}
                     >
                         {this.props.children}
                     </div>

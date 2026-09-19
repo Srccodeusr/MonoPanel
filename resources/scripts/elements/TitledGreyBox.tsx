@@ -18,7 +18,7 @@ const TitledGreyBox = ({ icon, title, children, className }: Props) => {
 
     return (
         <div
-            css={tw`rounded-xl shadow-lg ring-1 ring-white/5 overflow-hidden transition-shadow duration-300 hover:shadow-xl`}
+            css={tw`rounded-xl ring-1 ring-white/5 overflow-hidden transition-colors duration-150`}
             style={{ backgroundColor: colors.secondary }}
             className={className}
         >

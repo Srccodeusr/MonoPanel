@@ -28,7 +28,7 @@ class ErrorBoundary extends Component<Props, State> {
         return this.state.hasError ? (
             <div css={tw`flex items-center justify-center w-full my-4`}>
                 <div
-                    css={tw`flex items-center bg-neutral-900/90 backdrop-blur-sm rounded-xl shadow-lg ring-1 ring-red-500/20 p-3 text-red-500`}
+                    css={tw`flex items-center bg-neutral-900/90 backdrop-blur-sm rounded-xl ring-1 ring-red-500/20 p-3 text-red-500`}
                 >
                     <ExclamationIcon css={tw`h-4 w-4 flex-shrink-0 mr-2`} />
 

@@ -37,14 +37,7 @@ function PageContentBlock({ title, header, description, showFlashKey, className,
             <ContentContainer css={tw`mb-4`}>
                 <p css={tw`text-center text-neutral-500 text-xs`}>
                     Powered by&nbsp;
-                    <a
-                        rel={'noopener nofollow noreferrer'}
-                        href={'https://jexpanel.com'}
-                        target={'_blank'}
-                        css={tw`no-underline text-neutral-500 hover:text-neutral-300`}
-                    >
-                        Jexpanel.com
-                    </a>
+                    <span css={tw`text-neutral-400`}>MonoNode</span>
                 </p>
             </ContentContainer>
         </>

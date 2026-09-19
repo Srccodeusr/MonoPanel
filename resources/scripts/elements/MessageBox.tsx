@@ -43,7 +43,7 @@ const getBackground = (type?: FlashMessageType): TwStyle | string => {
 };
 
 const Container = styled.div<{ $type?: FlashMessageType }>`
-    ${tw`p-3 items-center leading-normal rounded-full flex w-full text-sm text-white mx-4 border backdrop-blur-md shadow-lg`};
+    ${tw`p-3 items-center leading-normal rounded-lg flex w-full text-sm text-white mx-4 border backdrop-blur-md shadow-sm`};
     ${props => styling(props.$type)};
 `;
 Container.displayName = 'MessageBox.Container';
@@ -78,7 +78,7 @@ const MessageBox = ({ title, children, type }: Props) => {
                             aria-label={'Dismiss'}
                             onClick={() => setOpen(false)}
                             className={
-                                'inline-flex items-center justify-center flex-shrink-0 text-gray-400 hover:text-gray-200 duration-150 hover:rotate-90 transition-transform'
+                                'inline-flex items-center justify-center flex-shrink-0 text-gray-400 hover:text-gray-200 duration-150 transition-colors'
                             }
                         >
                             <XIcon className={'w-4 h-4'} />

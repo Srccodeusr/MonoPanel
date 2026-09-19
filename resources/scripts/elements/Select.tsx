@@ -19,7 +19,7 @@ const selectStyle = () => {
         }
 
         &:focus {
-            ${tw`ring-4 ring-primary-500/20`};
+            ${tw`ring-2 ring-primary-500/25`};
         }
 
         -webkit-appearance: none;

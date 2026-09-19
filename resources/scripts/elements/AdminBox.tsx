@@ -44,7 +44,7 @@ const AdminBox = ({
     return (
         <div
             className={className}
-            css={tw`relative rounded-xl shadow-lg hover:shadow-xl ring-1 ring-white/5 transition-all duration-300 overflow-hidden`}
+            css={tw`relative rounded-xl ring-1 ring-white/5 transition-colors duration-150 overflow-hidden`}
             style={{ backgroundColor: theme.colors.secondary }}
         >
             <SpinnerOverlay visible={isLoading || false} />

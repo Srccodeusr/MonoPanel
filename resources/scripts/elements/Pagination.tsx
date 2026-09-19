@@ -20,7 +20,7 @@ interface Props<T> {
 }
 
 const Block = styled(Button)`
-    ${tw`p-0 w-10 h-10 rounded-full transition-transform duration-150 hover:scale-105`}
+    ${tw`p-0 w-10 h-10 rounded-full transition-colors duration-150`}
 
     &:not(:last-of-type) {
         ${tw`mr-2`};

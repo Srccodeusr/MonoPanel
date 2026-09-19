@@ -41,7 +41,7 @@ const spin = keyframes`
 `;
 
 const ActionButton = styled(Button)`
-    ${tw`rounded-full w-8 h-8 flex items-center justify-center p-0 shadow-md transition-transform duration-200 hover:scale-110`};
+    ${tw`rounded-full w-8 h-8 flex items-center justify-center p-0 ring-1 ring-white/10 transition-colors duration-150`};
 
     &.hover\\:spin:hover {
         animation: ${spin} 2s linear infinite;
@@ -55,7 +55,7 @@ const ScreenBlock = ({ title, image, message, onBack, onRetry }: ScreenBlockProp
         <PageContentBlock>
             <div css={tw`flex justify-center`}>
                 <div
-                    css={tw`w-full sm:w-3/4 md:w-1/2 p-12 md:p-20 rounded-2xl shadow-xl ring-1 ring-white/5 text-center relative`}
+                    css={tw`w-full sm:w-3/4 md:w-1/2 p-12 md:p-20 rounded-xl ring-1 ring-white/5 text-center relative`}
                     style={{ backgroundColor: secondary }}
                 >
                     {(typeof onBack === 'function' || typeof onRetry === 'function') && (
@@ -159,7 +159,7 @@ const Suspended = ({
         <PageContentBlock>
             <div css={tw`flex justify-center`}>
                 <div
-                    css={tw`w-full sm:w-3/4 md:w-1/2 p-12 md:p-20 rounded-2xl shadow-xl ring-1 ring-white/5 text-left relative`}
+                    css={tw`w-full sm:w-3/4 md:w-1/2 p-12 md:p-20 rounded-xl ring-1 ring-white/5 text-left relative`}
                     style={{ backgroundColor: secondary }}
                 >
                     <div css={tw`absolute left-0 top-0 ml-4 mt-4`}>
