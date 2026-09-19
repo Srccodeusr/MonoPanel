@@ -150,7 +150,7 @@ export default () => {
                                     {product ? <Money value={product.price} /> : '...'} every {settings.renewal.days}{' '}
                                     days
                                 </p>
-                                <Link to={'/account/billing/orders'} className={'text-green-400 text-xs'}>
+                                <Link to={'/account/billing/orders'} className={'text-primary-400 text-xs'}>
                                     View order <FontAwesomeIcon icon={faArrowRight} />
                                 </Link>
                             </div>
