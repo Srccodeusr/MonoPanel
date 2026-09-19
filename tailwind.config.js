@@ -5,14 +5,15 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                header: ['"IBM Plex Sans"', '"Roboto"', 'system-ui', 'sans-serif'],
+                sans: ['"Inter"', '"Geist"', 'system-ui', 'sans-serif'],
+                header: ['"Inter"', '"Geist"', 'system-ui', 'sans-serif'],
             },
             colors: {
-                black: '#09090b',
+                black: '#0a0e14',
                 slate: colors.slate,
                 // "primary" and "neutral" are deprecated, prefer the use of "blue" and "gray"
                 // in new code.
-                primary: colors.green,
+                primary: colors.blue,
                 neutral: colors.slate,
                 cyan: colors.cyan,
                 zinc: colors.zinc,
