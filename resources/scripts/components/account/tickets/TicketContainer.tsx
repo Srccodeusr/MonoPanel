@@ -14,13 +14,13 @@ import { useStoreState } from '@/state/hooks';
 export const statusToColor = (status: string): string => {
     switch (status) {
         case 'in-progress':
-            return 'bg-yellow-200 text-yellow-800';
+            return 'bg-amber-500/10 text-amber-400';
         case 'unresolved':
-            return 'bg-red-200 text-red-800';
+            return 'bg-red-500/10 text-red-400';
         case 'resolved':
-            return 'bg-green-200 text-green-800';
+            return 'bg-emerald-500/10 text-emerald-400';
         default:
-            return 'bg-gray-400 text-gray-800';
+            return 'bg-white/5 text-gray-400';
     }
 };
 
