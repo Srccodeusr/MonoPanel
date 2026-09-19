@@ -18,7 +18,7 @@ export default ({ icon, label, value, caption, className }: Props) => {
 
     return (
         <div
-            className={classNames('p-4 rounded-xl shadow-lg ring-1 ring-white/5', className)}
+            className={classNames('p-4 rounded-xl ring-1 ring-white/5', className)}
             style={{ backgroundColor: colors.secondary }}
         >
             <div className={'flex items-center justify-between'}>
