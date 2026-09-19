@@ -139,7 +139,7 @@ function LoginContainer() {
                         label={'Username or Email'}
                         name={'username'}
                         disabled={isSubmitting}
-                        placeholder={'user@jexpanel.com'}
+                        placeholder={'user@example.com'}
                     />
                     <div css={tw`mt-6`}>
                         <Label>
@@ -147,7 +147,7 @@ function LoginContainer() {
                             <Link
                                 to={'/auth/password'}
                                 tabIndex={-1}
-                                className={'ml-1 text-green-400 hover:text-green-200 duration-300 text-xs'}
+                                className={'ml-1 text-primary-400 hover:text-primary-300 duration-150 text-xs'}
                             >
                                 Forgot Password?
                             </Link>
