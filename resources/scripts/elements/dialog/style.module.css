@@ -3,7 +3,7 @@
 }
 
 .panel {
-    @apply relative bg-zinc-700/95 backdrop-blur-xl rounded-2xl w-full mx-auto shadow-2xl text-left;
+    @apply relative bg-zinc-700/95 backdrop-blur-xl rounded-xl w-full mx-auto text-left;
     @apply ring-1 ring-white/10;
 }
 
@@ -12,11 +12,11 @@
 }
 
 .close_icon {
-    @apply w-5 h-5 group-hover:rotate-90 transition-transform duration-100;
+    @apply w-5 h-5 transition-colors duration-150;
 }
 
 .dialog_icon {
-    @apply flex items-center justify-center w-10 h-10 rounded-full mr-4 shadow-lg ring-4;
+    @apply flex items-center justify-center w-10 h-10 rounded-full mr-4 ring-1;
 
     &.danger {
         @apply bg-red-500/90 text-red-50 ring-red-500/20;
