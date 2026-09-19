@@ -29,7 +29,7 @@ export default () => {
         <PageContentBlock>
             <div className={'flex justify-center'}>
                 <div
-                    className={'w-full sm:w-3/4 md:w-1/2 p-12 rounded-lg shadow-lg text-center relative'}
+                    className={'w-full sm:w-3/4 md:w-1/2 p-12 rounded-lg ring-1 ring-white/10 text-center relative'}
                     style={{ backgroundColor: colors.secondary }}
                 >
                     <FlashMessageRender byKey={'billing:process'} className={'mb-6'} />

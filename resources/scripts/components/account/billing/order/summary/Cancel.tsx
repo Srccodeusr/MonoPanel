@@ -9,7 +9,7 @@ export default () => {
         <PageContentBlock>
             <div className={'flex justify-center'}>
                 <div
-                    className={'w-full sm:w-3/4 md:w-1/2 p-12 md:p-20 rounded-lg shadow-lg text-center relative'}
+                    className={'w-full sm:w-3/4 md:w-1/2 p-12 md:p-20 rounded-lg ring-1 ring-white/10 text-center relative'}
                     style={{ backgroundColor: colors.secondary }}
                 >
                     <CancelSvg color={colors.primary} />
