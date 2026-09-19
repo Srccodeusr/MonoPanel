@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>{{ config('app.name', 'Everest') }}</title>
+        <title>{{ config('app.name', 'MonoNode') }}</title>
 
         @section('meta')
             <meta charset="utf-8">
@@ -13,19 +13,19 @@
             <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
             <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
             <link rel="manifest" href="/favicons/manifest.json">
-            <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#bc6e3c">
+            <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#3b82f6">
             <link rel="shortcut icon" href="/favicons/favicon.ico">
             <meta name="msapplication-config" content="/favicons/browserconfig.xml">
-            <meta name="theme-color" content="#0e4688">
+            <meta name="theme-color" content="#0a0e14">
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link rel="stylesheet" href="//fonts.googleapis.com/css?family=IBM+Plex+Sans:500&display=swap">
+            <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Inter:wght@400;500;600;700&display=swap">
         @show
 
         @section('user-data')
             @if(!is_null(Auth::user()))
                 <script>
-                    window.PterodactylUser = {!! json_encode(Auth::user()->toReactObject(), JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT) !!};
+                    window.MonoNodeUser = {!! json_encode(Auth::user()->toReactObject(), JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT) !!};
                 </script>
             @endif
             @if(!empty($siteConfiguration))
